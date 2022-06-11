@@ -1,0 +1,51 @@
+A választható feladatok közül a kompozíciót választottam.
+
+Mi a különbség az Exception és a RuntimeException között?
+- Az Exception a RuntimeException ősosztálya. Minden ami Exception nem biztos, hogy RuntimeException, viszont minden RuntimeException biztos, hogy az Exception része is, hisz az egyik leszármazott osztálya.
+
+Hogyan kell őket használni?
+- try-catch, try with resources, try-finally blokkokkal kell kezelnünk őket, vagy tovább dobjuk őket a "throws" segítségével.
+pl.: public static void exceptionThrower() throws Exception { }
+
+Mire érdemes figyelni a kezelésüknél?
+- Ha 2 catch ágban szeretnénk "elnyelni" az adott hibát, akkor figyelnünk kell, hogy például, a RuntimeException előbb legyen, mint az Exception ág, mert csak az egyik ág futhat le.
+
+pl.:
+
+    try {  //kód amit hibakezelni szeretnénk  } catch (RuntimeException e) { //
+    } catch (Exception e) { // }
+
+Hogyan tudunk egy kollekcióból bejárás közben elemeket törölni?
+ - Iterátorral tudunk biztonságosan törölni.
+
+Mutasd be egy vázlatosan (kóddal) az elemek törlésének a módját.
+
+    ArrayList<String> fruits = new ArrayList<>();
+    fruits.add("Apple");
+    fruits.add("Peach");
+    fruits.add("Banana");
+
+    Iterator i = fruits.iterator();
+    while (i.hasNext()) {
+       String str = (String) i.next();
+       if (str.equals("Peach")) {
+           i.remove();
+           break;
+           }
+       }
+
+Ismertesd röviden az OOP koncepciókat a Java-ban.
+ - Enkapszuláció: privát fieldeket hozunk létre, és getterek setterek segítségével férünk hozzájuk.
+ - Öröklődés: Egy osztály egy másiktól öröklődik, lánc öröklődés amikor több osztály öröklődik egymás után
+ - Polimorfizmus: Egy metódus aminem ugyan az a neve egy másik osztályban mást csinál. @Override annotáció, vagy akár Overloading, amikor pl más bemeneti paramétereket kap.
+ - Absztrakció: Törzs nélküli osztályok létrehozása absztrakt osztályban, vagy interfészben. A leszármazott/implementált osztályokban írunk hozzájuk törzset.
+ - Van pár egyéb: kohézió, asszociáció, aggregáció, kompozíció...
+
+Milyen adatszerkezet segítségével lehetne a gyakorlati feladatok alatt
+beolvasott meccsek adatait mindig dátum szerint rendezett sorrendben
+tárolni?
+- TreeMap, TreeSet, Comparator<> compare, Comparable<> compareTo metódussal.
+
+Mit kellene a meccsek adatait tároló osztálynál változtatni, hogy képes
+legyen az adatszerkezettel együttműködni?
+- implementálni a Comparator<OsztalyNeve> és Override-olni a compare metódust
